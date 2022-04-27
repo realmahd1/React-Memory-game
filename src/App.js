@@ -28,6 +28,7 @@ function App() {
     setChoiceTwo(null);
     setTurn(turn + 1);
   }
+
   // compare the selected cards
   useEffect(() => {
     if (choiceOne && choiceTwo) {
@@ -38,7 +39,7 @@ function App() {
       else {
         setTimeout(() => {
           resetTurn();
-        }, 500);
+        }, 1000);
       }
     }
   }, [choiceOne, choiceTwo,resetTurn])
