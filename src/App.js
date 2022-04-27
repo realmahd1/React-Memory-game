@@ -36,7 +36,9 @@ function App() {
         resetTurn();
       }
       else {
-        resetTurn();
+        setTimeout(() => {
+          resetTurn();
+        }, 500);
       }
     }
   }, [choiceOne, choiceTwo,resetTurn])
@@ -51,7 +53,7 @@ function App() {
       <button onClick={shuffleCards}>New Game</button>
 
       <div className='card-grid'>
-        {cards.map((card) => <SingleCard card={card} handleChoice={handleChoice} />)}
+        {cards.map((card) => <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card === choiceOne || card === choiceTwo || card.matched} />)}
       </div>
     </div>
   );
