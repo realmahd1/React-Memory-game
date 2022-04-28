@@ -15,6 +15,7 @@ function App() {
   const [turn, setTurn] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   //shuffle the cards
   const shuffleCards = () => {
@@ -27,11 +28,13 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurn(turn + 1);
+    setDisabled(false);
   }
 
   // compare the selected cards
   useEffect(() => {
     if (choiceOne && choiceTwo) {
+      setDisabled(true);
       if (choiceOne.src === choiceTwo.src) {
         setCards(cards.map(card => card.src === choiceOne.src ? { ...card, matched: true } : card));
         resetTurn();
@@ -54,7 +57,7 @@ function App() {
       <button onClick={shuffleCards}>New Game</button>
 
       <div className='card-grid'>
-        {cards.map((card) => <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card === choiceOne || card === choiceTwo || card.matched} />)}
+        {cards.map((card) => <SingleCard key={card.id} card={card} handleChoice={handleChoice} disabled={disabled} flipped={card === choiceOne || card === choiceTwo || card.matched} />)}
       </div>
     </div>
   );
